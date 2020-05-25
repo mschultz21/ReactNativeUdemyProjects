@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import { AppLoading } from 'expo';
 import { useFonts } from '@use-expo/font'; //couldn't use expo-font because it was being a cunt - this is the workaround i found
 import { composeWithDevTools } from 'redux-devtools-extension';
 //import * as Font from 'expo-font';
+import ReduxThunk from 'redux-thunk';
 
 import productsReducer from './store/reducers/products';
 import cartReducer from './store/reducers/cart';
@@ -17,7 +18,7 @@ const rootReducer = combineReducers({
   orders: ordersReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 // const fetchFonts = async () => {
 // 	await Font.loadAsync({
