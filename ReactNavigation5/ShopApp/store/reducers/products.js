@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 				action.productData.id,
 				action.productData.ownerId,
 				action.productData.title,
-				action.productData.image,
+				action.productData.imageUrl,
 				action.productData.description,
 				action.productData.price
 			);

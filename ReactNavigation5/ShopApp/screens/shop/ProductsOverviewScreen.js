@@ -28,10 +28,10 @@ const ProductsOverviewScreen = (props) => {
   }, [dispatch, setIsLoading, setError]);
 
   useEffect(() => { //will only run after page is reloaded (ie navigating away and coming back)
-    const willFocusSub = props.navigation.addListener('willFocus', loadProducts);
+    const unsubscribe = props.navigation.addListener('focus', loadProducts);
 
     return () => {
-      willFocusSub.remove();
+      unsubscribe();
     }
   }, [loadProducts]);
 
@@ -103,10 +103,10 @@ const ProductsOverviewScreen = (props) => {
 	);
 };
 
-ProductsOverviewScreen.navigationOptions = (navData) => {
+export const screenOptions = (navData) => {
 	return {
 		headerTitle: 'All Products',
-		headerRight: () => (
+		headerRight: (props) => (
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
 				<Item
 					title='Cart'
@@ -117,7 +117,7 @@ ProductsOverviewScreen.navigationOptions = (navData) => {
 				/>
 			</HeaderButtons>
     ),
-    headerLeft: () => (
+    headerLeft: (props) => (
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item 
           title='Menu'
